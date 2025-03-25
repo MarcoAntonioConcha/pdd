@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Lógica para abrir la segunda pantalla
+        // Lógica para abrir la segunda pantalla a partir del botón
         Button buttonOpenSecond = findViewById(R.id.button_open_second);
         buttonOpenSecond.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity2.class);
             startActivity(intent);
         });
 
+        // Lógica para abrir la terceraa pantalla
         Button buttonOpenThird = findViewById(R.id.button_open_third);
         buttonOpenSecond.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity2.class);

@@ -2,45 +2,91 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <!-- Texto centrado horizontal y vertical -->
-    <TextView
-        android:id="@+id/hello_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <!-- Lista: ScrollView con LinearLayout interno -->
+    <ScrollView
+        android:id="@+id/scrollView_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_open_second"
+        app:layout_constraintBottom_toTopOf="@+id/button_open_third"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Botón 2 debajo del texto -->
-    <Button
-        android:id="@+id/button_open_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/go_to_second_screen"
-        app:layout_constraintTop_toBottomOf="@id/hello_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <!-- Botón 3 debajo del botón 2 -->
+            <!-- Botón como primer elemento de la lista -->
+            <Button
+                android:id="@+id/button_open_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/go_to_second_screen" />
+
+            <!-- Cinco entradas de texto, cada una con un tamaño mínimo similar al botón -->
+            <TextView
+                android:id="@+id/text_entry_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="@string/entry_1" />
+
+            <TextView
+                android:id="@+id/text_entry_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="@string/entry_2" />
+
+            <TextView
+                android:id="@+id/text_entry_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="@string/entry_3" />
+
+            <TextView
+                android:id="@+id/text_entry_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="@string/entry_4" />
+
+            <TextView
+                android:id="@+id/text_entry_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="@string/entry_5" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botón fuera de la lista, anclado a la parte inferior de la pantalla -->
     <Button
         android:id="@+id/button_open_third"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/go_to_third_screen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_open_second" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

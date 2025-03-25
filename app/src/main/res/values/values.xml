@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaterialDesignExample</string>
+    <string name="go_to_second_screen">Ir a la segunda pantalla</string>
+    <string name="entry_1">Entrada 1</string>
+    <string name="entry_2">Entrada 2</string>
+    <string name="entry_3">Entrada 3</string>
+    <string name="entry_4">Entrada 4</string>
+    <string name="entry_5">Entrada 5</string>
+    <string name="go_to_third_screen">Ir a la tercera pantalla</string>
+</resources>
