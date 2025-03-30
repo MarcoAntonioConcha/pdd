@@ -22,6 +22,7 @@ public class MainActivity extends BaseActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             return insets;
         });
 
@@ -31,6 +32,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -38,9 +40,8 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.button_open_third).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aquí podrías agregar código para abrir una tercera actividad
-                // Intent intent = new Intent(MainActivity.this, MainActivity3.class);
-                // startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+                startActivity(intent);
             }
         });
     }
