@@ -1,4 +1,4 @@
-package mx.unam.fciencias.moviles.materialdesignexample;
+package mx.unam.fciencias.moviles.materialdesign;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.activity.EdgeToEdge;
 
-public class MainActivity2 extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<String> itemList;
@@ -38,9 +38,9 @@ public class MainActivity2 extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_infinite);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Inicializa la lista con al menos un elemento
+        // Inicializa la lista con al menos un elemento (requisito C)
         itemList = new ArrayList<>();
-        itemList.add("Elemento 1");
+        itemList.add(getString(R.string.initial_element));
 
         // Crea el adaptador y lo asigna al RecyclerView
         adapter = new SimpleAdapter(itemList);
@@ -48,9 +48,10 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     // Método llamado al presionar el botón (definido en el XML con android:onClick="addItem")
+    // Requisito B: El botón debe agregar una entrada de texto a la Lista Infinita
     public void addItem(View view) {
         int position = itemList.size() + 1;
-        itemList.add("Elemento " + position);
+        itemList.add(getString(R.string.element_position, position));
         adapter.notifyItemInserted(itemList.size() - 1);
         recyclerView.scrollToPosition(itemList.size() - 1);
     }

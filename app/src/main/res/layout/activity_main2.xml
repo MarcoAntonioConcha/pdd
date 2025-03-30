@@ -6,9 +6,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context="mx.unam.fciencias.moviles.materialdesign.SecondActivity">
 
-    <!-- Contenedor vertical que agrupa el botón, el separador y la lista infinita -->
+    <!-- Contenedor vertical que agrupa el botón, el separador y la lista infinita (requisito A) -->
     <LinearLayout
         android:id="@+id/vertical_stack"
         android:layout_width="0dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Botón que añade elementos a la lista -->
+        <!-- Botón que añade elementos a la lista (requisito B) -->
         <Button
             android:id="@+id/button_first"
             android:layout_width="match_parent"
@@ -27,14 +27,14 @@
             android:text="Agregar Elemento"
             android:onClick="addItem" />
 
-        <!-- Separador -->
+        <!-- Separador (requisito A) -->
         <View
             android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
 
-        <!-- Lista infinita scrolleable -->
+        <!-- Lista infinita scrolleable (requisito A, C) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_infinite"
             android:layout_width="match_parent"

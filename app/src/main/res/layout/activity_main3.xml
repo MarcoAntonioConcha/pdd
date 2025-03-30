@@ -5,6 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity3">
+    tools:context="mx.unam.fciencias.moviles.materialdesign.ThirdActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

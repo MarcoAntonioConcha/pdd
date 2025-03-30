@@ -1,4 +1,4 @@
-package mx.unam.fciencias.moviles.materialdesignexample;
+package mx.unam.fciencias.moviles.materialdesiginstrumentedtest;
 
 import android.content.Context;
 

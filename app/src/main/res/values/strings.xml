@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Material Design</string>
+
+    <!-- MainActivity resources -->
+    <string name="go_to_second_screen">Ir a la segunda pantalla</string>
+    <string name="go_to_third_screen">Ir a la tercera pantalla</string>
+    <string name="entry_1">Entrada 1</string>
+    <string name="entry_2">Entrada 2</string>
+    <string name="entry_3">Entrada 3</string>
+    <string name="entry_4">Entrada 4</string>
+    <string name="entry_5">Entrada 5</string>
+
+    <!-- MainActivity2 resources -->
+    <string name="add_element">Agregar Elemento</string>
+    <string name="initial_element">Elemento 1</string>
+    <string name="element_position">Elemento %1$d</string>
+</resources>

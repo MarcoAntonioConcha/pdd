@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'mx.unam.fciencias.moviles.materialdesignexample'
+    namespace 'mx.unam.fciencias.moviles.materialdesign'
     compileSdk 35
 
     defaultConfig {
-        applicationId "mx.unam.fciencias.moviles.materialdesignexample"
+        applicationId "mx.unam.fciencias.moviles.materialdesign"
         minSdk 24
         targetSdk 35
         versionCode 1
