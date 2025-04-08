@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="?android:attr/dividerHorizontal"
+    android:showDividers="middle">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/master_list_width"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <!-- Botón que añade elementos a la lista (requisito B) -->
+        <Button
+            android:id="@+id/button_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Elemento"
+            android:onClick="addItem" />
+
+        <!-- Separador (requisito A) -->
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Lista infinita scrolleable (requisito A, C) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_infinite"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+
+    <include layout="@layout/activity_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3" />
+
+
+
+</LinearLayout>
