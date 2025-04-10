@@ -1,6 +1,6 @@
 package mx.unam.fciencias.moviles.materialdesign;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.appcompat.app.AlertDialog;
@@ -24,6 +24,9 @@ public class BaseActivity extends AppCompatActivity {
         } else if (id == R.id.action_minimize) {
             // Minimiza la aplicación (lleva la tarea al fondo)
             moveTaskToBack(true);
+            return true;
+        }else if(id == R.id.menu_settings){
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

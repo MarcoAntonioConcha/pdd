@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="theme_preference_options">
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
+
+    <string-array name="theme_preference_ids">
+        <item>@string/light_theme_preference_id</item>
+        <item>@string/dark_theme_preferences_id</item>
+    </string-array>
+</resources>
