@@ -1,28 +1,33 @@
 package mx.unam.fciencias.moviles.materialdesign;
 
-import android.content.pm.ActivityInfo;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.activity.EdgeToEdge;
 
-public class SecondActivity extends BaseActivity {
+public class SecondActivity extends BaseActivity implements SimpleAdapter.MasterListItemClickHandler {
 
-    private RecyclerView recyclerView;
-    private List<String> itemList;
     private SimpleAdapter adapter;
     private boolean isDetailsPanelAvailable;
 
@@ -38,134 +43,130 @@ public class SecondActivity extends BaseActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        // Inicializa RecyclerView
-        recyclerView = findViewById(R.id.recycler_infinite);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Inicializa la lista con al menos un elemento (requisito C)
-        itemList = new ArrayList<>();
-        itemList.add(getString(R.string.initial_element));
-
-        // Crea el adaptador y lo asigna al RecyclerView
-        adapter = new SimpleAdapter(itemList,(position, entryText, listSize) -> {
-            if(isDetailsPanelAvailable){
-                Bundle detailFragmentsArgs = new Bundle();
-                detailFragmentsArgs.putInt(DetailsFragment.INDEX_KEY, position);
-                detailFragmentsArgs.putInt(DetailsFragment.MASTER_LIST_SIZE_KEY, listSize);
-                DetailsFragment detailsFragment = new DetailsFragment();
-                detailsFragment.setArguments(detailFragmentsArgs);
-                getSupportFragmentManager().beginTransaction().replace(
-                  R.id.color_detail_holder, detailsFragment
-                ).commit();
-            }else{
-                Intent intent = new Intent(this, DetailActivity.class);
-                intent.putExtra(DetailsFragment.INDEX_KEY, position);
-                intent.putExtra(DetailActivity.ENTRY_MESSAGE_KEY, entryText);
-                intent.putExtra(DetailsFragment.MASTER_LIST_SIZE_KEY, listSize);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_main2);
+        Button button = findViewById(R.id.button_first);
+        button.setOnClickListener(this::addListElement);
+        RecyclerView recyclerView = findViewById(R.id.recycler_infinite);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new SimpleAdapter(getResources(), this);
+        addListElement(null);
         recyclerView.setAdapter(adapter);
-
         isDetailsPanelAvailable = findViewById(R.id.color_detail_holder) != null;
-
     }
 
-    // Método llamado al presionar el botón (definido en el XML con android:onClick="addItem")
-    // Requisito B: El botón debe agregar una entrada de texto a la Lista Infinita
-    public void addItem(View view) {
-        int position = itemList.size() + 1;
-        itemList.add(getString(R.string.element_position, position));
-        adapter.notifyItemInserted(itemList.size() - 1);
-        recyclerView.scrollToPosition(itemList.size() - 1);
-    }
+    // Método llamado al presionar el botón (android:onClick="addItem")
 
+    public void addListElement(View button){
+        adapter.addItem();
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && isDetailsPanelAvailable){
+        if (hasFocus && isDetailsPanelAvailable) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
         }
     }
 
-
-
-
-    /******************************************************************
-     *
-     *              Adaptador para el RecyclerView
-     *
-     *******************************************************************
-     */
-    public static class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
-
-        private List<String> items;
-        private final MasterListItemClickHandler CLICK_HANDLER;
-
-        public SimpleAdapter(List<String> items, MasterListItemClickHandler listItemClickHandler) {
-            this.items = items;
-            CLICK_HANDLER = listItemClickHandler;
+    @Override
+    public void onItemClicked(int clickedItemIndex, String entryText, int masterListSize) {
+        if (isDetailsPanelAvailable) {
+            Bundle detailFragmentsArgs = new Bundle();
+            detailFragmentsArgs.putInt(DetailsFragment.INDEX_KEY, clickedItemIndex);
+            detailFragmentsArgs.putInt(DetailsFragment.MASTER_LIST_SIZE_KEY, masterListSize);
+            DetailsFragment detailFragment = new DetailsFragment();
+            detailFragment.setArguments(detailFragmentsArgs);
+            getSupportFragmentManager().beginTransaction().replace(
+                    R.id.color_detail_holder, detailFragment
+            ).commit();
+        } else {
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra(DetailsFragment.INDEX_KEY, clickedItemIndex);
+            intent.putExtra(DetailActivity.ENTRY_MESSAGE_KEY, entryText);
+            intent.putExtra(DetailsFragment.MASTER_LIST_SIZE_KEY, masterListSize);
+            startActivity(intent);
         }
+    }
+}
 
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_layout, parent, false);
-            return new ViewHolder(view);
-        }
+/******************************************************************
+ *
+ *              Adaptador para el RecyclerView
+ *
+ *******************************************************************/
+class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
 
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            //holder.textView.setText(items.get(position));
-            holder.bind(items.get(position), position, items.size(), CLICK_HANDLER);
-        }
+    private final List<String> ITEM_LIST;
 
-        @Override
-        public int getItemCount() {
-            return items.size();
-        }
+    private final MasterListItemClickHandler CLICK_HANDLER;
+    private final Resources RESOURCES;
 
-
-        /******************************************************************
-         *
-         *  ViewHolder que representa cada elemento de la lista
-         *
-         *******************************************************************
-         */
-        public static class ViewHolder extends RecyclerView.ViewHolder{
-            public final TextView textView;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                textView = itemView.findViewById(R.id.item_text);
-                textView.setClickable(true);
-                textView.setFocusable(true);
-            }
-
-
-
-            public void bind(String text, int position, int listSize, MasterListItemClickHandler handler){
-                textView.setText(text);
-                itemView.setOnClickListener(v -> handler.onItemClicked(position, text, listSize));
-            }
-
-        }
-
-
-        /*
-         *  Interfaz para manejar clics en elementos de la lista
-         */
-        public interface MasterListItemClickHandler{
-            void onItemClicked(int clickItemIndex, String entryText, int masterListSize);
-        }
-
-
+    public SimpleAdapter(Resources res, MasterListItemClickHandler clickHandler) {
+        ITEM_LIST = new LinkedList<>();
+        RESOURCES = res;
+        CLICK_HANDLER = clickHandler;
     }
 
 
+    public void addItem(){
+        int i = ITEM_LIST.size();
+        ITEM_LIST.add(i, "Elemento {i + 1}");
+        notifyItemInserted(i);
+    }
 
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_layout, parent, false);
+        return new ViewHolder((TextView) view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.textView.setText(ITEM_LIST.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return ITEM_LIST.size();
+    }
+
+    /******************************************************************
+     *
+     *  ViewHolder que representa cada elemento de la lista
+     *
+     *******************************************************************/
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public final TextView textView;
+
+        public ViewHolder(@NonNull TextView itemView) {
+            super(itemView);
+            textView = itemView;
+            textView.setFocusable(true);
+            textView.setClickable(true);
+            textView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            CLICK_HANDLER.onItemClicked(getAdapterPosition(), textView.getText().toString(), ITEM_LIST.size());
+        }
+    }
+
+    /*
+     *  Interfaz para manejar clics en elementos de la lista
+     */
+    public interface MasterListItemClickHandler {
+        void onItemClicked(int clickItemIndex, String entryText, int masterListSize);
+    }
 
 }

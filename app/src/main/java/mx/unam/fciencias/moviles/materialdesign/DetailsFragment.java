@@ -17,8 +17,7 @@ public class DetailsFragment extends Fragment {
 
 
     protected static final String INDEX_KEY = "mx.unam.fciencias.moviles.materialdesign.INDEX";
-    protected static final String MASTER_LIST_SIZE_KEY =
-            "mx.unam.fciencias.moviles.materialdesign.MASTER_LIST_SIZE";
+    protected static final String MASTER_LIST_SIZE_KEY = "mx.unam.fciencias.moviles.materialdesign.MASTER_LIST_SIZE";
 
     private int selectedIndex;
     private int masterListSize;
@@ -60,7 +59,7 @@ public class DetailsFragment extends Fragment {
         int[] intRGB = new int[] {
                 (int) rgb[0] * 255,
                 (int) rgb[1] * 255,
-                (int) rgb[2] * 255};
+                (int) rgb[2] * 255 };
         int indexColor = Build.VERSION.SDK_INT < Build.VERSION_CODES.O ?
                 Color.rgb(intRGB[0], intRGB[1], intRGB[2]) :
                 Color.rgb(rgb[0], rgb[1], rgb[2]);
@@ -78,16 +77,12 @@ public class DetailsFragment extends Fragment {
         //hex.setText(Integer.toHexString(indexColor));
 
         return rootView;
-
-
     }
 
 
     private float[] generateColorFromIndex(){
 
-        if(masterListSize <= 0) return new float[]{0f, 0f, 0f};
-
-        float datasetThird = masterListSize /3f; //Calcula el tamañp de un tercio del total de elementos
+        float datasetThird = masterListSize /3f; //Calcula el tamaño de un tercio del total de elementos
         byte third;
         int previousThird;
         // Determina en que tercio está el índice seleccionado

@@ -52,4 +52,6 @@
     <string name="transition_preference_option_summary">
         Active o desactive las animaciones de transició. Puede mejorar el rendimiento
     </string>
+
+    <string name="hello_blank_fragment">""</string>
 </resources>

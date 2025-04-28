@@ -1,30 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/preferences_general_section_title"
+    <androidx.preference.PreferenceCategory>
+
+        <androidx.preference.ListPreference
+            android:key="@string/theme_preferences_key"
+            android:title="@string/theme_preference_options_title"
+            android:dialogTitle="@string/theme_preference_options_title"
+            android:entries="@array/theme_preference_options"
+            android:entryValues="@array/theme_preference_ids"
+            android:summary="@string/theme_preference_option_summary"
+            android:icon="@android:drawable/ic_menu_more"
+            android:dialogIcon="@android:drawable/ic_menu_more"
+            android:defaultValue="@string/light_theme_preference_id"/>
 
 
-    <androidx.preference.ListPreference
-        android:key="@string/theme_preferences_key"
-        android:title="@string/theme_preference_options_title"
-        android:dialogTitle="@string/theme_preference_options_title"
-        android:entries="@array/theme_preference_options"
-        android:entryValues="@array/theme_preference_ids"
-        android:summary="@string/theme_preference_option_summary"
-        android:icon="@android:drawable/ic_menu_more"
-        android:dialogIcon="@android:drawable/ic_menu_more"
-        android:defaultValue="@string/light_theme_preference_id"/>
-
-
-    <androidx.preference.CheckBoxPreference
-        android:key="@string/enable_transitions_preference_key"
-        android:title="@string/transition_preference_option_title"
-        android:summary="@string/transition_preference_option_summary"
-        android:icon="@android:drawable/ic_menu_slideshow"
-        android:defaultValue="true"/>
-
-
-
-
+        <androidx.preference.CheckBoxPreference
+            android:key="@string/enable_transitions_preference_key"
+            android:title="@string/transition_preference_option_title"
+            android:summary="@string/transition_preference_option_summary"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:defaultValue="true"/>
+    </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

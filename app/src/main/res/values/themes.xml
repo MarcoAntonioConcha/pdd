@@ -4,5 +4,18 @@
         <!-- Personaliza tu tema aquí -->
     </style>
 
+    <style name="LightTheme" parent="Theme.Material3.DayNight"/>
+
+    <style name="DarkTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@android:transition/explode</item>
+        <item name="android:windowExitTransition">@android:transition/explode</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_transform</item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_transform</item>
+    </style>
+
     <style name="Theme.MaterialDesign" parent="Base.Theme.MaterialDesign" />
 </resources>

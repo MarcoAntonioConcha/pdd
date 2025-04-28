@@ -13,11 +13,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <!-- Botón que añade elementos a la lista (requisito B) -->
+        <!-- Botón que añade elementos a la lista  -->
         <Button
             android:id="@+id/button_first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Agregar Elemento"
             android:onClick="addItem" />
 

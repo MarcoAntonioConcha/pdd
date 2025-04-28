@@ -31,22 +31,16 @@ public class MainActivity extends BaseActivity {
         });
 
         // Configura el listener del botón para abrir la segunda actividad
-        findViewById(R.id.button_open_second).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
+        findViewById(R.id.button_open_second).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         // Configura el listener del botón para abrir la tercera actividad (si existe)
-        findViewById(R.id.button_open_third).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
-                startActivity(intent);
-            }
+        findViewById(R.id.button_open_third).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+            startActivity(intent);
         });
     }
 }
