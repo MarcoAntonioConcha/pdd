@@ -34,7 +34,10 @@ public class SecondActivity extends BaseActivity implements SimpleAdapter.Master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setContentView(R.layout.activity_main2);
 
         // Ajusta los insets para bordes seguros
@@ -43,12 +46,7 @@ public class SecondActivity extends BaseActivity implements SimpleAdapter.Master
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
-        setContentView(R.layout.activity_main2);
         Button button = findViewById(R.id.button_first);
         button.setOnClickListener(this::addListElement);
         RecyclerView recyclerView = findViewById(R.id.recycler_infinite);
@@ -117,7 +115,7 @@ class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
 
     public void addItem(){
         int i = ITEM_LIST.size();
-        ITEM_LIST.add(i, "Elemento {i + 1}");
+        ITEM_LIST.add(i, "Elemento " + (i + 1));
         notifyItemInserted(i);
     }
 
@@ -125,9 +123,9 @@ class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        TextView view = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_layout, parent, false);
-        return new ViewHolder((TextView) view);
+        return new ViewHolder(view);
     }
 
     @Override

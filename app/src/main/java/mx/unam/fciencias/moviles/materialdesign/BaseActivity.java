@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.app.NavUtils;
 import androidx.preference.PreferenceManager;
 
 public class BaseActivity extends AppCompatActivity {
@@ -96,6 +97,9 @@ public class BaseActivity extends AppCompatActivity {
         }else if(id == R.id.menu_settings){
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
+        }
+        else if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
     }
